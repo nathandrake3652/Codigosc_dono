@@ -20,7 +20,7 @@ class Software
     void setdevelop(string developer);
     int getclasi();
     void setclasi(int clasificacion);
-    vector<Usuario> getusers();
+    vector<Usuario>& getusers();
     bool adduser(Usuario a);
     //bool popuser(Usuario a);
     
@@ -53,7 +53,7 @@ int Software::getclasi(){
 void Software::setclasi(int clasificacion){
     this-> clasificacion=clasificacion;
 }
-vector<Usuario> Software::getusers(){
+vector<Usuario>& Software::getusers(){
     return this-> users;
 } 
 bool Software ::adduser(Usuario a){

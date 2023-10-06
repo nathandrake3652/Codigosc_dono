@@ -17,3 +17,12 @@ class promedio:public Usuario{
 promedio:: promedio(string user, string password, int edad, string correo):Usuario(user, password,edad){
     this -> correo =correo;
 }
+promedio::~promedio(){
+
+}
+string promedio::getcorreo(){
+    return this->correo;
+}
+void promedio::setcorreo(string correo){
+    this ->correo = correo;
+}

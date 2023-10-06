@@ -11,6 +11,7 @@ class Juego:public Software{
     string getgenre();
     void setgenre(string genero);
     void jugar();
+    int horas();
 };
 Juego::Juego(string nombre,string developer,int clasificacion,int precio, vector<Usuario> users, string genero):Software(nombre,developer,clasificacion,precio,users){
         this ->genero = genero;
@@ -29,4 +30,8 @@ void Juego:: jugar(){
     cout<<"Ingrese cuantas horas jugara"<<endl;
     cin>>horas;
     this -> horas_jugadas = horas_jugadas +horas;
+}
+
+int Juego::horas(){
+    return this -> horas_jugadas;
 }

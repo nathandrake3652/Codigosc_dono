@@ -53,3 +53,6 @@ int Usuario::getedad(){
 void Usuario::setedad(int edad){
     this-> edad= edad;
 }
+int Usuario::comprobador(int edad){
+return edad;
+}
