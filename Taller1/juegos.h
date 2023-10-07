@@ -6,14 +6,14 @@ class Juego:public Software{
     string genero;
     int horas_jugadas =0;
     public:
-    Juego(string nombre,string developer,int clasificacion,int precio, vector<Usuario> users, string genero);
+    Juego(string nombre,string developer,int clasificacion,int precio, string genero);
     ~Juego();
     string getgenre();
     void setgenre(string genero);
     void jugar();
     int horas();
 };
-Juego::Juego(string nombre,string developer,int clasificacion,int precio, vector<Usuario> users, string genero):Software(nombre,developer,clasificacion,precio,users){
+Juego::Juego(string nombre,string developer,int clasificacion,int precio, string genero):Software(nombre,developer,clasificacion,precio){
         this ->genero = genero;
 }
 Juego::~Juego(){

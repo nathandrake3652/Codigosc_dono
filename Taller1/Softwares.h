@@ -12,7 +12,7 @@ class Software
     protected:
     vector<Usuario> users;
     public:
-    Software(string nombre,string developer,int clasificacion,int precio, vector<Usuario>users);
+    Software(string nombre,string developer,int clasificacion,int precio);
     ~Software();
     string getnombre();
     void setnombre(string nombre);
@@ -20,17 +20,17 @@ class Software
     void setdevelop(string developer);
     int getclasi();
     void setclasi(int clasificacion);
-    vector<Usuario>& getusers();
-    bool adduser(Usuario a);
+    virtual vector<Usuario>& getusers();
+    virtual bool adduser(Usuario a);
     //bool popuser(Usuario a);
     
 };
-Software::Software(string nombre,string developer,int clasificacion,int precio, vector<Usuario> users){
+Software::Software(string nombre,string developer,int clasificacion,int precio){
     this ->nombre =nombre;
     this -> developer = developer;
     this -> clasificacion =clasificacion;
     this -> precio = precio;
-    this -> users = users;
+    
 }
 Software::~Software(){
 
