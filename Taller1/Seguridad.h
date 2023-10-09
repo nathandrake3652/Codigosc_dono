@@ -7,12 +7,14 @@ class Seguridad:public Software{
     string maltype;
     int baul;
     public:
-    Seguridad(string nombre,string developer,int clasificacion,int precio, vector<Usuario>users,string maltype);
+    Seguridad(string nombre,string developer,int clasificacion,int precio,string maltype);
     ~Seguridad();
     string gettype();
     int getbaul();
     bool comprobar(string maltype);
     void asegurar(string tvirus);
+    bool compuser(Usuario a) override;
+    
 };
 
 bool Seguridad:: comprobar(string maltype){
@@ -21,10 +23,11 @@ bool Seguridad:: comprobar(string maltype){
    }
    cout<< "tipo de malware no disponible ingrese otro"<<endl;
    cin>> maltype;
-   comprobar(maltype);
+    return comprobar(maltype);
+
 }
 
-Seguridad::Seguridad(string nombre,string developer,int clasificacion,int precio, vector<Usuario>users,string maltype):Software(nombre,developer,clasificacion,precio,users){
+Seguridad::Seguridad(string nombre,string developer,int clasificacion,int precio, string maltype):Software(nombre,developer,clasificacion,precio){
     bool si = comprobar(maltype);
     if(si){
         this ->maltype =maltype;
@@ -50,3 +53,17 @@ void Seguridad::asegurar(string tvirus){
     }
 
 }
+ 
+bool Seguridad::compuser(Usuario a)
+{
+    int edad = a.getedad();
+     Admin* adminPtr = dynamic_cast< Admin*>(&a);
+        if (adminPtr) {
+            if(adminPtr->getacces()) {
+                adduser(a);
+                return true;
+            }
+}
+return false;
+}
+

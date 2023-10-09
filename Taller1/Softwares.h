@@ -23,6 +23,8 @@ class Software
     virtual vector<Usuario>& getusers();
     virtual bool adduser(Usuario a);
     //bool popuser(Usuario a);
+    virtual bool compuser(Usuario a);
+    virtual bool relluser(vector<Usuario> a);
     
 };
 Software::Software(string nombre,string developer,int clasificacion,int precio){
@@ -63,3 +65,16 @@ bool Software ::adduser(Usuario a){
 /*bool Software::popuser(Usuario a){
     
 }*/
+bool Software::compuser(Usuario a){
+    if(a.getedad() >= clasificacion){
+        adduser(a);
+        return true;
+    }
+    return false;
+}
+bool Software::relluser(vector<Usuario> a){
+    for(Usuario user: a ){
+        compuser(user);
+    }
+    return true;
+}

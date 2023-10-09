@@ -23,6 +23,7 @@ class Usuario
     void setpass(string npass);
     virtual int comprobador(int edad);
     
+    
 };
 
 Usuario::Usuario(string user, string password, int edad){

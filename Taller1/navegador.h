@@ -5,19 +5,15 @@
 
 class navegador:public Software{
     private:
-    string navname;
     queue<string> historial;
     public:
-    navegador(string nombre,string developer,int clasificacion,int precio, string navname,queue<string> historial);
+    navegador(string nombre,string developer,int clasificacion,int precio, queue<string> historial);
     ~navegador();
-    string getnav();
-    void setnav(string navname);
     bool buscar(string busqueda);
     void history();
     bool historyadd(string xd);
 };
-navegador::navegador(string nombre,string developer,int clasificacion,int precio, string navname,queue<string> historial):Software(nombre,developer,clasificacion,precio){
-    this ->navname =navname;
+navegador::navegador(string nombre,string developer,int clasificacion,int precio, queue<string> historial):Software(nombre,developer,clasificacion,precio){
     this ->historial=historial;
 }
 navegador::~navegador(){
@@ -35,16 +31,12 @@ bool navegador:: historyadd(string xd){
     }
     else{
         historial.push(xd);
+        return true;
 
     }
-    
+    return false;
 }
-string navegador::getnav(){
-    return this ->navname;
-}
-void navegador::setnav(string navname){
-    this ->navname =navname;
-}
+
 void navegador::history(){
     queue<string> copia= historial;
     while (!copia.empty())
@@ -57,4 +49,5 @@ void navegador::history(){
 bool navegador::buscar(string xd){
     cout<<"visitaste la pagina"<<xd<<endl;
     historyadd(xd);
+    return true;
 }
