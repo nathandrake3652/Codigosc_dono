@@ -13,13 +13,13 @@ class navegador:public Software{
     void history();
     bool historyadd(string xd);
 };
-navegador::navegador(string nombre,string developer,int clasificacion,int precio, queue<string> historial):Software(nombre,developer,clasificacion,precio){
+navegador::navegador(string nombre,string developer,int clasificacion,int precio, queue<string> historial):Software(nombre,developer,clasificacion,precio){//constructor con herencia
     this ->historial=historial;
 }
-navegador::~navegador(){
+navegador::~navegador(){//destructor
 
 }
-bool navegador:: historyadd(string xd){
+bool navegador:: historyadd(string xd){//añade las busquedas al historial
     if(historial.empty()){
         historial.push(xd);
         return true;
@@ -37,7 +37,7 @@ bool navegador:: historyadd(string xd){
     return false;
 }
 
-void navegador::history(){
+void navegador::history(){ //muestra el historial de navegacion
     queue<string> copia= historial;
     while (!copia.empty())
     {
@@ -46,7 +46,7 @@ void navegador::history(){
     }
     
 }
-bool navegador::buscar(string xd){
+bool navegador::buscar(string xd){ //"visita" una pagina web y llama a la funcion historyadd
     cout<<"visitaste la pagina"<<xd<<endl;
     historyadd(xd);
     return true;

@@ -14,15 +14,15 @@ class promedio:public Usuario{
     void setcorreo(string correo);
 };
 
-promedio:: promedio(string user, string password, int edad, string correo):Usuario(user, password,edad){
+promedio:: promedio(string user, string password, int edad, string correo):Usuario(user, password,edad){//constructor con herencia
     this -> correo =correo;
 }
-promedio::~promedio(){
+promedio::~promedio(){//destructor
 
 }
-string promedio::getcorreo(){
+string promedio::getcorreo(){//getter
     return this->correo;
 }
-void promedio::setcorreo(string correo){
+void promedio::setcorreo(string correo){//setter
     this ->correo = correo;
 }

@@ -13,25 +13,24 @@ class Juego:public Software{
     void jugar();
     int horas();
 };
-Juego::Juego(string nombre,string developer,int clasificacion,int precio, string genero):Software(nombre,developer,clasificacion,precio){
-        this ->genero = genero;
+Juego::Juego(string nombre,string developer,int clasificacion,int precio, string genero):Software(nombre,developer,clasificacion,precio){//constructor con herencia
 }
-Juego::~Juego(){
+Juego::~Juego(){//destructor
 
 }
-string Juego::getgenre(){
+string Juego::getgenre(){ //getter
     return this ->genero;
 }
-void Juego::setgenre(string genero){
+void Juego::setgenre(string genero){//setter
     this -> genero = genero;
 }
-void Juego:: jugar(){
+void Juego:: jugar(){//funcion que aumenta las horas jugadas de un juego
     int horas=0;
     cout<<"Ingrese cuantas horas jugara"<<endl;
     cin>>horas;
     this -> horas_jugadas = horas_jugadas +horas;
 }
 
-int Juego::horas(){
+int Juego::horas(){ //getter
     return this -> horas_jugadas;
 }

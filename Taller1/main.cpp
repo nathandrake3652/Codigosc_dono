@@ -2,6 +2,7 @@
 #include <vector>
 #include <queue>
 #include "Usuarios.h"
+#include "Usuarios.cpp"
 #include "Admin.h"
 #include "promedio.h"
 #include "nino.h"
@@ -13,7 +14,58 @@
 #include "Produccion.h"
 using namespace std;
 
-Usuario* login(vector<Usuario*> users) { // funcion que recorre el vector de usuarios y comprueba credenciales
+void softmen(vector<Software*>& soft, Usuario* user){ // menu en el que un usuario puede añadir un software elminarlo o utilizar sus softwares
+    int menu= 0;
+    
+    do {
+    user->dispsoft(soft);
+    cout << "1. Añadir un Software" << endl;
+    cout << "2. Eliminar un Software" << endl;
+    cout << "3. Usar un Software" << endl;
+    cout << "4. Logout" << endl;
+    cin >> menu;
+
+    switch (menu) {
+        case 1:
+            user->addsoft();
+            break;
+        case 2:
+            user->eliminarsoft();
+            break;
+        case 3:
+            user->versoft();
+            break;
+        case 4:
+            cout << "Cerrando sesión" << endl;
+            break;
+        default:
+            cout << "Opción incorrecta. Por favor, elija una opción válida." << endl;
+            cin.clear();
+            cin.ignore();
+            break;
+    }
+    
+     
+} while (menu != 4);
+}
+
+
+
+void fillbiblio(vector<Software*>& Soft, vector<Usuario*>& users ){ //relaciona los software con los usuarios que son capaces de utilizarlos viendo restricciones en casos especiales
+    for(Usuario* us: users){
+        for(Software* so: Soft){
+           if(Seguridad* segptr = dynamic_cast<Seguridad*> (so)){
+            segptr->compuser(us);
+           }
+           else{
+            so->compuser(us);           
+            }
+           
+        }
+    }
+
+}
+Usuario* login(vector<Usuario*>& users) { // funcion que recorre el vector de usuarios y comprueba credenciales
     string name;
     string pass;
     cout << "Ingrese su nombre de Usuario" << endl;
@@ -34,8 +86,8 @@ Usuario* login(vector<Usuario*> users) { // funcion que recorre el vector de usu
     cout << "Nombre de usuario no encontrado." << endl;
     return nullptr;
 }
-void menu(vector<Usuario*> users, vector<Software*> soft) { // funcion que utiliza un switch para presentar el menu
-    
+void menu(vector<Usuario*>& users, vector<Software*>& soft) { // funcion que utiliza un switch para presentar el menu
+    fillbiblio(soft, users);
     int opcion = 0;
     cout<<"Bienvenido"; 
     Usuario* op = nullptr;
@@ -46,11 +98,11 @@ void menu(vector<Usuario*> users, vector<Software*> soft) { // funcion que utili
             case 1:
                 op = login(users);
                 if(op !=  nullptr){
-                  cout<<"funciona";
+                    op->dispsoft(soft);
+                  
+                  softmen(soft, op);
                 }
                
-                
-                
                 break; 
 
             case 2:
@@ -60,7 +112,7 @@ void menu(vector<Usuario*> users, vector<Software*> soft) { // funcion que utili
             default:
                 cout << "Opcion incorrecta, por favor intentelo nuevamente" << endl;
                 cout << "Bienvenido" << endl << "1. Iniciar sesion" << endl << "2. Salir";
-                
+                cin >> opcion;
                 break; 
         }
         
@@ -86,33 +138,33 @@ void crearusuarios(vector<Usuario*>& users){ //funcion que rellena la base de da
    users.push_back(new promedio("Alonso","12434ng245",20,"katsucki_cl@gmail.com"));
 };
 void crearjuegos(vector<Software*>& soft){ //funcion que crea juegos y los anade a la biblioteca
-   soft.push_back(new Juego("Call of Duty","ACTIVISION",18,45000, "FPS"));
-   soft.push_back(new Juego("Call of Duty: Black Ops","ACTIVISION",18,50000, "FPS"));
+   soft.push_back(new Juego("CallofDuty","ACTIVISION",18,45000, "FPS"));
+   soft.push_back(new Juego("Specopstheline","ACTIVISION",18,50000, "FPS"));
    soft.push_back(new Juego("Dofus","panda games",5,5000, "MMO"));
-   soft.push_back(new Juego("albion online","sandbox",15,0, "MMO"));
+   soft.push_back(new Juego("albiononline","sandbox",15,0, "MMO"));
    soft.push_back(new Juego("TETRIS","Nintendo",0,2000, "PUZZLE"));
    soft.push_back(new Juego("Fireboy & WaterGirl","friv",5,0, "PUZZLE"));
    soft.push_back(new Juego("Skyrim","Bethesda",18,20000, "Mundo Abierto"));
    soft.push_back(new Juego("Fallout 4","Bethesda",18,25000, "Mundo Abierto"));
-   soft.push_back(new Juego("The binding of Isaac","Nicalis.inc",13,15000, "Idie"));
-   soft.push_back(new Juego("Hollow Knight","Team cherry",13,12000, "indie"));
-   soft.push_back(new Juego("Darkest Dungeon","Red hook Studio",18,15000, "Dark Fantasy"));
-   soft.push_back(new Juego("Dark souls","FromSoftware",18,20000, "Dark Fantasy"));
-   soft.push_back(new Juego("Resident evil 2","Capcom",18,5000, "Survival Horror"));
-   soft.push_back(new Juego("Silent Hill","Konami",18,30000, "Survival Horror"));
-   soft.push_back(new Juego("Metal Gear Solid 3","Konami",18,15000, "sigilo"));
+   soft.push_back(new Juego("ThebindingofIsaac","Nicalis.inc",13,15000, "Idie"));
+   soft.push_back(new Juego("HollowKnight","Team cherry",13,12000, "indie"));
+   soft.push_back(new Juego("DarkestDungeon","Red hook Studio",18,15000, "Dark Fantasy"));
+   soft.push_back(new Juego("Darksouls","FromSoftware",18,20000, "Dark Fantasy"));
+   soft.push_back(new Juego("Residentevil2","Capcom",18,5000, "Survival Horror"));
+   soft.push_back(new Juego("SilentHill","Konami",18,30000, "Survival Horror"));
+   soft.push_back(new Juego("MetalGearSolid3","Konami",18,15000, "sigilo"));
    soft.push_back(new Juego("Payday2","starbreeze",18,450, "sigilo"));
-   soft.push_back(new Juego("Enter the Gungeon","dodge roll",10,3000, "Roguelike"));
-   soft.push_back(new Juego("Rogue Legacy","Cellar Door",10,5000, "Roguelike"));
-   soft.push_back(new Juego("the witcher 3","CD PROJEKT",18,30000, "Accion"));
-   soft.push_back(new Juego("skul the hero slayer","Southpaw games",12,5000, "Accion"));
+   soft.push_back(new Juego("EntertheGungeon","dodge roll",10,3000, "Roguelike"));
+   soft.push_back(new Juego("RogueLegacy","Cellar Door",10,5000, "Roguelike"));
+   soft.push_back(new Juego("thewitcher3","CD PROJEKT",18,30000, "Accion"));
+   soft.push_back(new Juego("skultheheroslayer","Southpaw games",12,5000, "Accion"));
 
 }
 void crearoffice(vector<Software*>& soft){ // funcion que crea los software de ofimatica y los añade a biblioteca
    soft.push_back(new Ofimatica("Word", "Microsoft",18,5000,5));
    soft.push_back(new Ofimatica("PowerPoint", "Microsoft",18,5000,3));
    soft.push_back(new Ofimatica("Canva", "gsga",18,5000,2));
-   soft.push_back(new Ofimatica("Google drive", "google",18,0,8));
+   soft.push_back(new Ofimatica("Googledrive", "google",18,0,8));
    soft.push_back(new Ofimatica("Dropbox", "Microsoft",18,5000,1));
 }
 void crearprod(vector<Software*>& soft) { // funcion que crea los software de produccion y los añade a biblioteca
@@ -123,11 +175,11 @@ void crearprod(vector<Software*>& soft) { // funcion que crea los software de pr
 }
 
 void crearnav(vector<Software*>& soft,queue<string> a,queue<string> b){// funcion que crea los software de produccion y los añade a biblioteca
-   soft.push_back(new navegador("Opera gx","Opera Software",5,0, a));
-   soft.push_back(new navegador("Opera gx","Opera Software",5,0, b));
+   soft.push_back(new navegador("Operagx","Opera Software",5,0, a));
+   soft.push_back(new navegador("Google","Google ",5,0, b));
 
 }
-void crearseg(vector<Software*>& soft){
+void crearseg(vector<Software*>& soft){ // funcion que crea los software de seguridad y los añade a la biblioteca
     soft.push_back(new Seguridad("Avast","FLDSMFR",12,15000,"Ransomware"));
     soft.push_back(new Seguridad("MCffe","Microsoft",12,20000,"Spyware"));
     soft.push_back(new Seguridad("Defender","Microsoft",12,15000,"botnets"));
@@ -135,7 +187,7 @@ void crearseg(vector<Software*>& soft){
     soft.push_back(new Seguridad("Security","EA",12,15000,"gusanos"));
     soft.push_back(new Seguridad("Gold","Coffe",8,11000,"troyanos"));
 }
- void rellenar(vector<Software*>& soft, vector<Usuario*>& users,queue<string> a,queue<string> b){
+ void rellenar(vector<Software*>& soft, vector<Usuario*>& users,queue<string> a,queue<string> b){ // se llama a las funcionas previamente descritas para ahorrar espacio en el main
          crearusuarios(users);
          crearjuegos(soft);
          crearnav(soft ,a ,b);

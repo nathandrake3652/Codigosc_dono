@@ -12,16 +12,16 @@ class Ofimatica:public Software{
     void crear();
     void eliminar();
 };
-Ofimatica::Ofimatica(string nombre,string developer,int clasificacion,int precio, int archivos):Software(nombre,developer,clasificacion,precio){
+Ofimatica::Ofimatica(string nombre,string developer,int clasificacion,int precio, int archivos):Software(nombre,developer,clasificacion,precio){//constructor con herencia
     this ->archivos=archivos;
 }
-Ofimatica::~Ofimatica(){
+Ofimatica::~Ofimatica(){//destructor
 
 }
-int Ofimatica::getarch(){
-    return this ->archivos =archivos;
+int Ofimatica::getarch(){//getter
+    return this ->archivos; 
 }
-void Ofimatica::crear(){
+void Ofimatica::crear(){//"crea" un archivo
     int cant =0;
     cout<<"cuantos archivos va a crear"<<endl;
     cin>> cant;

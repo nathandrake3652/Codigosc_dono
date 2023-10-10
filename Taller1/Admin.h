@@ -15,19 +15,19 @@ class Admin : public Usuario{
     void setcorreo(string correo);
 };
 
-Admin::Admin(string user, string password,int edad,string correo):Usuario( user, password,edad){
+Admin::Admin(string user, string password,int edad,string correo):Usuario( user, password,edad){ //constructor
     this-> isAdmin =true;
     this->correo = correo;
 }
-bool Admin::getacces(){
+bool Admin::getacces(){ //getter
     return this-> isAdmin;
 }
-string Admin::getcorreo(){
+string Admin::getcorreo(){//getter
     return this-> correo;
 }
-Admin::~Admin(){
+Admin::~Admin(){//destructor
 
 }
-void Admin::setcorreo(string correo){
+void Admin::setcorreo(string correo){//setter
     this->correo =correo;
 }
